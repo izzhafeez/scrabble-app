@@ -1,0 +1,7 @@
+.env
+.DS_Store
+scrabble-frontend/node_modules/
+scrabble-frontend/.next/
+scrabble-frontend/out/
+scrabble-frontend/.env.local
+scrabble-frontend/package-lock.json

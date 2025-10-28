@@ -6,12 +6,14 @@ const Square = ({
         letter: initialLetter,
         onChange,
         onFocus,
-        ref
+        ref,
+        id
     }: {
         letter: string,
         onChange: (letter: string) => void,
         onFocus: () => void,
-        ref: any
+        ref: any,
+        id: any,
     }) => {
     const [letter, setLetter] = useState<string>(initialLetter);
     const [score, setScore] = useState<number>(0);
@@ -58,7 +60,7 @@ const Square = ({
     };
 
     return (
-        <div className="relative w-12 h-12 xl:w-20 xl:h-20">
+        <div className="relative w-12 h-12 xl:w-20 xl:h-20" id={`square-${id}`}>
             <input
                 type="text"
                 maxLength={1}

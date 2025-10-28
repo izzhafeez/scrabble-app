@@ -1,6 +1,6 @@
 "use client";
 
-import { getSubmissions } from "@/app/service/scoreSubmission";
+import { getSubmissions } from "../../service/scoreSubmission";
 import { useEffect, useState } from "react";
 import LeaderboardEntry from "./LeaderboardEntry";
 import toast from "../common/toast";

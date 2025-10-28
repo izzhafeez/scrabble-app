@@ -67,7 +67,58 @@ const Row = ({ loadedWord, refreshLeaderboard }: { loadedWord: string, refreshLe
         });
     };
 
+    const findStartEndIndex = () => {
+        let start = -1;
+        let end = -1;
+
+        for (let i = 0; i < letters.length; i++) {
+            if (letters[i] !== "" && start === -1) {
+                start = i;
+            }
+            if (letters[i] !== "") {
+                end = i;
+            }
+        }
+
+        return { start, end };
+    }
+
+    const isValid = () => {
+        // a valid word has at least one letter
+        if (letters.every(letter => letter === "")) return false;
+
+        // should not contain gaps in between letters
+        const { start, end } = findStartEndIndex();
+        for (let i = start; i <= end; i++) {
+            if (letters[i] === "") {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     const handleSave = () => {
+        if (!isValid()) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Word',
+                text: 'Please ensure the word has no gaps and contains at least one letter.',
+            });
+
+            // set gaps to space for user to see error
+            const { start, end } = findStartEndIndex();
+            const updated = [...letters];
+            for (let i = start; i <= end; i++) {
+                if (updated[i] === "") {
+                    updated[i] = " ";
+                }
+            }
+            setLetters(updated);
+
+            return;
+        }
+
         // save the word and score to leaderboard
         const word = letters.join('');
         const score = totalScore;
@@ -115,6 +166,7 @@ const Row = ({ loadedWord, refreshLeaderboard }: { loadedWord: string, refreshLe
                 {letters.map((letter, index) => (
                     <Square
                         key={index}
+                        id={index}
                         letter={letter}
                         ref={(el: any) => inputRefs.current[index] = el}
                         onFocus={() => setCurrentIndex(index)}
