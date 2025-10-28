@@ -15,7 +15,7 @@ This application allows you to enter words, calculate their Scrabble scores, and
 ### Clone the repository
 
 ```
-git clone TODO
+git clone git@github.com:izzhafeez/scrabble-app.git
 cd scrabble-app
 ```
 
